@@ -1,0 +1,36 @@
+.main {
+  height: 100vh;
+  background-image: url('../../images/main.png');
+}
+
+.first {
+  max-width: 1600px;
+  height: 100vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.USP {
+  max-width: 1200px;
+  height: 100%;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  
+  text-align: center;
+}
+
+.h1 {
+  font-size: 48px;
+  margin: 0;
+}
+
+.description {
+  font-size: 16px;
+}
