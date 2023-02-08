@@ -1,0 +1,32 @@
+.footer {
+  padding: 80px 0;
+  background-color: #323234;
+}
+
+.container {
+  max-width: 1600px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.blocks {
+  display: flex;
+  justify-content: space-between;
+  gap: 200px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info span:first-child {
+  font-weight: 600;
+}
+
+.footer img {
+  width: 200px;
+}

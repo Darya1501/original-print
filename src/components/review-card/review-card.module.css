@@ -1,0 +1,28 @@
+.card {
+  max-width: 500px;
+  background-color: #49494A;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  border-radius: 36px;
+  gap: 20px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.text {
+  margin: 0;
+  font-size: 14px;
+}

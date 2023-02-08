@@ -1,3 +1,21 @@
+.container {
+  max-width: 1600px;
+  margin: auto;
+  padding: 80px 0;
+}
+
+.h1 {
+  font-size: 48px;
+  margin: 0;
+}
+
+.h2 {
+  font-size: 24px;
+  margin: 0;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
 .main {
   height: 100vh;
   background-image: url('../../images/main.png');
@@ -22,15 +40,45 @@
   align-items: center;
   justify-content: center;
   gap: 60px;
-  
-  text-align: center;
-}
 
-.h1 {
-  font-size: 48px;
-  margin: 0;
+  text-align: center;
 }
 
 .description {
   font-size: 16px;
+}
+
+.products {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 60px;
+}
+
+.link {
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #51A2DA
+}
+
+.reviews {
+  background-color: #323234;
+}
+
+.reviews > .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form {
+  max-width: 1600px;
+  margin: auto;
+  padding: 80px 0 160px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviews h2 {
+  font-size: 24px;
 }
