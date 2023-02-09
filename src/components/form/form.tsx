@@ -23,7 +23,7 @@ export const Form = () => {
 
       <label className={styles.label}>
         <span>Комментарий</span>
-        <textarea></textarea>
+        <textarea placeholder='Если у вас есть какие-нибудь пожелания, напишите их здесь'></textarea>
       </label>
 
       <Button>Заказать</Button>

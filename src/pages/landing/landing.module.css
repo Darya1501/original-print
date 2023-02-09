@@ -19,6 +19,9 @@
 .main {
   height: 100vh;
   background-image: url('../../images/main.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .first {
@@ -52,6 +55,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 60px;
+  gap: 20px;
 }
 
 .link {
@@ -68,6 +72,7 @@
 .reviews > .container {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .form {
@@ -81,4 +86,107 @@
 
 .reviews h2 {
   font-size: 24px;
+}
+
+
+@media (max-width: 1700px ) {
+  .container, .first, .form {
+    max-width: 1100px;
+  }
+
+  .products div:nth-child(n+5) {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px ) {
+  .container, .first, .form {
+    max-width: 800px;
+  }
+
+  .form {
+    align-items: flex-start;
+    gap: 100px;
+  }  
+}
+
+@media (max-width: 900px) {
+  .container, .first, .form {
+    max-width: 90%;
+  }
+
+  .container {
+    padding: 40px 0;
+  }
+
+  .h1 {
+    font-size: 32px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .products {
+    flex-wrap: wrap;
+  }
+
+  .products div:nth-child(n+5) {
+    display: flex;
+  }
+
+  .reviews > .container {
+    padding: 40px 0;
+  }
+
+  .reviews > .container div:nth-child(n+3) {
+    display: none;
+  }
+
+  .form {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    padding: 40px 0;
+  }
+
+  .form h2 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .h1 {
+    font-size: 24px;
+  }
+
+  .USP {
+    gap: 20px;
+  }
+
+  .products {
+    gap: 10px;
+  }
+
+  .link {
+    font-size: 14px;
+  }
+
+  .h2, .form h2 {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .form p {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .products {
+    margin-bottom: 24px;
+  }
+
+  .reviews > .container {
+    flex-wrap: wrap;
+  }
 }

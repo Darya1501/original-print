@@ -28,3 +28,41 @@
 .title {
   font-size: 14px;
 }
+
+
+@media (max-width: 1200px ) {
+  .card {
+    max-width: 180px;
+  }
+
+  .image {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 900px ) {
+  .card {
+    max-width: 30%;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 600px ) {
+  .card {
+    max-width: calc(50% - 6px);
+    padding: 10px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  .title {
+    font-size: 12px;
+  }
+}

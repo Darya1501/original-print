@@ -6,6 +6,7 @@
   gap: 24px;
   border-radius: 36px;
   width: 904px;
+  flex-shrink: 0;
 }
 
 .row {
@@ -52,4 +53,59 @@
 
 .label:has(textarea) {
   margin-bottom: 36px;
+}
+
+@media (max-width: 1700px ) {
+  .form {
+    width: 550px;
+  }
+  .row {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1200px ) {
+  .form {
+    width: 400px;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .label span {
+    margin-bottom: 10px;
+  }
+
+  .label input, .form textarea {
+    font-size: 14px;
+    min-width: 320px;
+  }
+
+  .label input::placeholder {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px ) { 
+  .form {
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  .label input, .form textarea {
+    min-width: 100%;
+    padding: 10px 12px;
+  }
+
+  .label span {
+    font-size: 14px;
+  }
+
+  .label:has(textarea) {
+    margin-bottom: 16px;
+  }
 }

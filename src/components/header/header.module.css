@@ -10,3 +10,37 @@
   gap: 100px;
   color: #858585
 }
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 1200px ) {
+  .navigation {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 900px ) {
+  .mobile {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 12px 0;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+  }
+
+  .desctop {
+    display: none;
+  }
+}
+
+@media (max-width: 600px ) {
+  .navigation {
+    gap: 20px;
+  }
+  .navigation span {
+    font-size: 12px;
+  }
+}

@@ -7,3 +7,10 @@
   border: none;
   align-self: center;
 }
+
+@media (max-width: 900px ) {
+  .button {
+    padding: 12px 60px;
+    font-size: 14px;
+  }
+}
