@@ -10,7 +10,7 @@ export const ReviewsScreen = () => {
 
   return (
     <div className={styles.reviews}>
-      <div className={styles.container}>
+      <div className={`container ${styles.container}`}>
         <ReviewCard review={review} />
         <ReviewCard review={review} />
         <ReviewCard review={review} />

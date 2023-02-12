@@ -54,7 +54,7 @@
 
 @media (max-width: 600px ) {
   .card {
-    max-width: calc(50% - 6px);
+    max-width: calc(50% - 10px);
     padding: 10px;
   }
 

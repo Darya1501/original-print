@@ -1,6 +1,4 @@
 .container {
-  max-width: 1600px;
-  margin: auto;
   padding: 80px 0;
 }
 
@@ -24,13 +22,10 @@
   background-size: cover;
   display: flex;
   flex-direction: column;
-  
 }
 
 .first {
-  max-width: 1600px;
   height: 100%;
-  margin: auto;
 }
 
 .USP {
@@ -76,8 +71,6 @@
 }
 
 .form {
-  max-width: 1600px;
-  margin: auto;
   padding: 80px 0 160px;
   display: flex;
   justify-content: space-between;
@@ -90,29 +83,18 @@
 
 
 @media (max-width: 1700px ) {
-  .container, .first, .form {
-    max-width: 1300px;
-  }
-
-  .products div:nth-child(n+6) {
+  .products a:nth-child(n+6) {
     display: none;
   }
 }
 
 @media (max-width: 1400px ) {
-  .container, .first, .form {
-    max-width: 1100px;
-  }
-  .products div:nth-child(n+5) {
+  .products a:nth-child(n+5) {
     display: none;
   }
 }
 
 @media (max-width: 1200px ) {
-  .container, .first, .form {
-    max-width: 800px;
-  }
-
   .form {
     align-items: flex-start;
     gap: 100px;
@@ -120,10 +102,6 @@
 }
 
 @media (max-width: 900px) {
-  .container, .first, .form {
-    max-width: 90%;
-  }
-
   .container {
     padding: 40px 0;
   }
@@ -140,7 +118,7 @@
     flex-wrap: wrap;
   }
 
-  .products div:nth-child(n+5) {
+  .products a:nth-child(n+5) {
     display: flex;
   }
 

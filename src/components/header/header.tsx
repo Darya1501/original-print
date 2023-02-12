@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import logo from '../../images/logo.svg'
 import cart from '../../images/cart.svg'
 import styles from './header.module.css'
+import { Link } from 'react-router-dom'
 
 type THeaderProps = {
   background: boolean
@@ -10,12 +11,14 @@ type THeaderProps = {
 export const Header: FC<THeaderProps> = ({ background }) => {
   return (
     <div className={background ? styles.background : ''}>
-      <div className={styles.container}>
+      <div className='container'>
         <header className={styles.header}>
-          <img className={styles.logo} src={logo} alt="logo" />
+          <Link to='/'>
+            <img className={styles.logo} src={logo} alt="logo" />
+          </Link>
           <div className={styles.desctop}>
             <div className={styles.navigation}>
-              <span>Каталог</span>
+              <Link to='/catalog'>Каталог</Link>
               <span>Контакты</span>
               <span>Как сделать заказ?</span>
             </div>

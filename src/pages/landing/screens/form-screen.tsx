@@ -4,7 +4,7 @@ import styles from '../landing.module.css'
 
 export const FormScreen = () => {
   return (
-    <div className={styles.form}>
+    <div className={`container ${styles.form}`}>
       <div className={styles.question}>
         <h2>Уже определились с покупкой?</h2>
         <p>Оставьте свои контактные данные, мы Вам перезвоним</p>

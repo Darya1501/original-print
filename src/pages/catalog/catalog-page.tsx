@@ -5,6 +5,7 @@ import styles from './catalog.module.css'
 
 export const CatalogPage = () => {
   const product = {
+    id: '1',
     title: 'Футболка “Планы на завтра”',
     price: 2400
   }
@@ -12,7 +13,7 @@ export const CatalogPage = () => {
   return (
     <>
       <Header background={true} />
-      <div className={styles.container}>
+      <div className={`container ${styles.container}`}>
         <div className={styles.navigation}>
           <span>Футболки</span>
           <span>Поло</span>

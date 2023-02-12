@@ -7,7 +7,7 @@ export const MainScreen = () => {
   return (
     <div className={styles.main}>
       <Header background={false} />
-      <div className={styles.first}>
+      <div className={`container ${styles.first}`}>
         <div className={styles.USP}>
           <h1 className={styles.h1}>Креативная одежда и сувенирная продукция</h1>
           <div>
