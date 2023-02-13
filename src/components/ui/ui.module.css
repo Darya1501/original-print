@@ -4,8 +4,13 @@
   border-radius: 8px;
   color: #fff;
   font-size: 16px;
-  border: none;
+  border: 1px solid #51A2DA;
   align-self: center;
+}
+
+.secondary {
+  background-color: transparent;
+  color: #51A2DA;
 }
 
 @media (max-width: 900px ) {
