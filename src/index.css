@@ -21,6 +21,10 @@ a {
   margin: auto;
 }
 
+button {
+  cursor: pointer;
+}
+
 @media (max-width: 1700px ) {
   .container {
     max-width: 1300px;

@@ -23,7 +23,9 @@ export const Header: FC<THeaderProps> = ({ background }) => {
               <span>Как сделать заказ?</span>
             </div>
           </div>
-          <img src={cart} alt="Корзина" />
+          <Link to='/cart'>
+            <img src={cart} alt="Корзина" />
+          </Link>
         </header>
         <div className={styles.mobile}>
           <div className={styles.navigation}>
