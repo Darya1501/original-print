@@ -1,14 +1,12 @@
 import React from 'react'
+import { Footer } from '../../components/footer/footer'
 import { Header } from '../../components/header/header'
 import { ProductCard } from '../../components/product-card/product-card'
+import { useSelector } from '../../hooks/store-hooks'
 import styles from './catalog.module.css'
 
 export const CatalogPage = () => {
-  const product = {
-    id: '1',
-    title: 'Футболка “Планы на завтра”',
-    price: 2400
-  }
+  const { products } = useSelector(state => state.products);
 
   return (
     <>
@@ -20,14 +18,10 @@ export const CatalogPage = () => {
           <span>Кружки</span>
         </div>
         <div className={styles.products}>
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
-          <ProductCard product={product} />
+          { products.map(product => (<ProductCard key={product.id} product={product} />)) }
         </div>
       </div>
+      <Footer />
     </>
   )
 }
