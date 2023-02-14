@@ -12,10 +12,18 @@
   background-color: #323234;
   min-width: 200px;
   border-radius: 16px;
+  overflow: hidden;
 }
 
-.navigation span {
+.category {
   padding: 10px 20px;
+  cursor: pointer;
+  color: #858585
+}
+
+.active {
+  background-color: #49494A;
+  color: #FFFFFF;
 }
 
 .products {

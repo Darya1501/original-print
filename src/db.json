@@ -17,6 +17,23 @@
       "image": "https://sun9-60.userapi.com/yc-mbBL9wIEGrCaxOYtwmQWRNFSw8rFvEh1nHA/0T1ARAhLYlI.jpg",
       "sizes": "300мл",
       "colors": "белый"
+    },
+    {
+      "id": "3",
+      "title": "Какое-то длинное название",
+      "price": 10000,
+      "category": "Необычная категория",
+      "sizes": "Самые разные",
+      "colors": "Только те, которые никто не видел"
+    },
+    {
+      "id": "4",
+      "title": "Уэнсдей",
+      "price": 250,
+      "category": "Кружки",
+      "image": "https://sun9-8.userapi.com/FngxxdJquKCGEveuB36WvojqIYk-fNGGmXFSkg/EPl-NdjOZic.jpg",
+      "sizes": "300мл",
+      "colors": "белый"
     }
   ]
 }

@@ -1,27 +1,42 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
+import { useSelector } from '../../hooks/store-hooks'
+
 import { Footer } from '../../components/footer/footer'
 import { Header } from '../../components/header/header'
 import { Button } from '../../components/ui/button'
+import { TProduct } from '../../utils/types'
+
 import styles from './product.module.css'
+import plug from '../../images/no-photo.png'
 
 export const ProductPage = () => {
+  const { products } = useSelector(store => store.products)
+  const { id } = useParams<{ id?: string }>();
+  const cuttentProduct = products.find((product: TProduct) => product.id === id)
+
   return (
     <>
       <Header background={true} />
-      <div className={`container ${styles.container}`}>
-        <img className={styles.image} src="https://sun9-34.userapi.com/impg/Z_6hkGUkMeLbMzzp7Nv-Sdmn89HpwDfM4ylGEA/oeBgkAb6DXI.jpg?size=660x680&quality=95&sign=452501b8b97a0fc3117e226bf7a0d1f8&type=album" alt="" />
-        <div className={styles.description}>
-          <span className={styles.category}>Футболка</span>
-          <h2 className={styles.h2}>Планы на завтра</h2>
-          <p className={styles.price}>2400р</p>
-          <p className={styles.info}>Размеры: от 40 (XXS) до 70 (5XL)</p>
-          <p className={styles.info}>Цвета: белый, черный и красный</p>
-          <div className={styles.buttons}>
-            <Button>В корзину</Button>
-            <Button isSecondary>Купить 1 экземпляр</Button>
+      {
+        cuttentProduct &&
+        (
+          <div className={`container ${styles.container}`}>
+            <img className={styles.image} src={cuttentProduct.image ? cuttentProduct.image : plug} alt="" />
+            <div className={styles.description}>
+              <span className={styles.category}>Категория: {cuttentProduct.category}</span>
+              <h2 className={styles.h2}>{cuttentProduct.title}</h2>
+              <p className={styles.price}>{cuttentProduct.price} ₽</p>
+              <p className={styles.info}>Размеры: {cuttentProduct.sizes}</p>
+              <p className={styles.info}>Цвета: {cuttentProduct.colors}</p>
+              <div className={styles.buttons}>
+                <Button>В корзину</Button>
+                <Button isSecondary>Купить 1 экземпляр</Button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        )
+      }
       <Footer />
     </>
   )
