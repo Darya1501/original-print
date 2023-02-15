@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-export function setCookie(name: string, value: string, exdays: number) {
+export function setCookie(name: string, value: string, exdays: number = 5) {
   const d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
   let expires = "expires="+ d.toUTCString();

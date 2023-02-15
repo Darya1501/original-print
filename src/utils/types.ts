@@ -1,12 +1,13 @@
 import { ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { TCartActions } from "../store/actions/cart";
+import { TFormActions } from "../store/actions/form";
 import { TProductsActions } from "../store/actions/products";
 import { store } from "../store/store";
 
 export type RootState = ReturnType<typeof store.getState>;
 
 export type TApplicationActions =
-  TProductsActions | TCartActions;
+  TProductsActions | TCartActions | TFormActions;
 
 export type AppThunk<TReturn = void> = ThunkAction<TReturn, RootState, never, TApplicationActions>;
 export type AppDispatch = ThunkDispatch<RootState, never, TApplicationActions>;

@@ -8,7 +8,7 @@ type TCookieProduct = {
 
 export const updateCookieCart = (products: Array<TCartProduct>) => {
   const cart = products.map(product => ({ id: product.id, count: product.count }))
-  setCookie("original-print-cart", JSON.stringify(cart), 20)
+  setCookie("original-print-cart", JSON.stringify(cart))
 }
 
 const getProductById = (id: string, products: Array<TProduct>) => {

@@ -53,9 +53,7 @@ export const cartReducer = (state = initialCartState, action: TCartActions): TCa
       }
     }
     default: {
-      return {
-        ...initialCartState
-      }
+      return state
     }
   }
 }

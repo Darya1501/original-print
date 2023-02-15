@@ -1,16 +1,20 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CartItem } from '../../components/cart-item/cart-item'
 import { Footer } from '../../components/footer/footer'
+import { Form } from '../../components/forms/form'
 import { Header } from '../../components/header/header'
+import { Modal } from '../../components/modal/modal'
 import { Button } from '../../components/ui/button'
-import { useSelector } from '../../hooks/store-hooks'
+import { useDispatch, useSelector } from '../../hooks/store-hooks'
+import { CLEAR_FORM } from '../../store/constants/form'
 import styles from './cart.module.css'
-
-// TODO: !!! Добавить удаление товаров из корзины и очистку корзины
 
 export const CartPage = () => {
   const { products } = useSelector(store => store.cart)
+  const { name, phone, address, comment } = useSelector(store => store.form);
+  const [ isModal, setIsModal ] = useState(false)
+  const dispatch = useDispatch()
 
   const totalPrice = useMemo(() => {
     return products.reduce((acc, product) => acc + product.price * product.count, 0)
@@ -23,6 +27,13 @@ export const CartPage = () => {
     </span>
   }
 
+  const submitOrder: React.FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    console.log(`Новый заказ. Имя: ${name}, номер телефона: ${phone}. Дополнительно: адрес - ${address}, комментарий - ${comment}`)
+    console.log(`Заказ:${products.map(product => ` id: ${product.id}, название: ${product.title}, количество ${product.count}`)}`);
+    dispatch({ type: CLEAR_FORM })
+  }
+
   return (
     <>
       <Header background={true} />
@@ -32,10 +43,11 @@ export const CartPage = () => {
         </div>
         <div className={styles.total}>
           <span className={styles.price}>Итого: {totalPrice} ₽</span>
-          <Button isDisabled={!products?.length}>Оформить заказ</Button>
+          <Button isDisabled={!products?.length} onClick={() => setIsModal(true)}>Оформить заказ</Button>
         </div>
       </div>
       <Footer />
+      { isModal && <Modal onClose={() => setIsModal(false)}><Form size='small' onSubmit={submitOrder}/></Modal> }
     </>
   )
 }
