@@ -5,14 +5,15 @@
   background-color: #323234;
   border-radius: 16px;
   padding: 10px;
-  padding-right: 40px;
+  padding-right: 20px;
+  gap: 20px;
 }
+
 .image {
   width: 100px;
   height: 100px;
   object-fit: cover;
   border-radius: 16px;
-  margin-right: 20px;
 }
 
 .info {
@@ -20,6 +21,7 @@
   align-items: center;
   justify-content: space-between;
   flex-grow: 1;
+  gap: 20px;
 }
 
 .name, .price {
@@ -35,7 +37,6 @@
   align-items: center;
   gap: 20px;
   justify-content: center;
-  margin-right: 20px;
 }
 
 .minus, .plus {
@@ -74,12 +75,16 @@
   cursor: auto;
 }
 
+.trash {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
 @media (max-width: 1200px) {
   .info {
     flex-wrap: wrap;
-  }
-  .name {
-    margin-bottom: 20px;
+    justify-content: flex-start;
   }
 }
 
@@ -87,9 +92,6 @@
   .name, .price {
     font-size: 16px;
     margin: 0;
-  }
-  .name {
-    margin-bottom: 20px;
   }
   .quantity {
     gap: 10px;
@@ -101,11 +103,17 @@
 }
 
 @media (max-width: 600px) {
+  .card {
+    padding-right: 10px;
+  }
   .image {
     width: 60px;
     height: 60px;
   }
   .name, .price, .quantity span {
     font-size: 14px;
+  }
+  .trash img{
+    width: 16px;
   }
 }

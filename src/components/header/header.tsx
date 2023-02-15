@@ -28,7 +28,7 @@ export const Header: FC<THeaderProps> = ({ background }) => {
           </div>
           <Link to='/cart' className={styles.cart}>
             <img src={cart} alt="Корзина" />
-            {products.length !== 0 && <span className={styles.counter}>{products.length}</span>}
+            { products && products.length !== 0 && <span className={styles.counter}>{products.length}</span>}
           </Link>
         </header>
         <div className={styles.mobile}>

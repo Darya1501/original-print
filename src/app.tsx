@@ -8,8 +8,10 @@ import { CartPage } from './pages/cart/cart-page';
 import { CatalogPage } from './pages/catalog/catalog-page';
 import { LandingPage } from './pages/landing/landing-page';
 import { ProductPage } from './pages/product/product-page';
-import { useDispatch } from './hooks/store-hooks';
+import { useDispatch, useSelector } from './hooks/store-hooks';
 import { getProducts } from './store/actions/products';
+import { getCookieCart } from './utils/cart-functions';
+import { FILL_CART } from './store/constants/cart';
 
 
 const app = initializeApp({
@@ -26,6 +28,7 @@ export const dbRef = ref(getDatabase(app));
 
 
 function App() {
+  const { products } = useSelector(store => store.products)
   const dispatch = useDispatch()
 
   useEffect(
@@ -34,6 +37,13 @@ function App() {
     },
     [dispatch]
   );
+
+  useEffect(
+    () => {
+      const cart = getCookieCart(products)
+      dispatch({ type: FILL_CART, products: cart })
+    }, [products, dispatch]
+  )
 
   return (
     <div>

@@ -7,7 +7,7 @@ export const getCategories = (products: Array<TProduct>): Array<string> => {
 }
 
 export const isProductInCart = (product: TProduct | undefined, cart: Array<TCartProduct>): boolean => {
-  if (!product) return false 
+  if (!product || !cart) return false 
 
   let flag = false;
   for (let i = 0; i < cart.length; i++) {

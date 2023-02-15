@@ -11,6 +11,7 @@ import styles from './product.module.css'
 import plug from '../../images/no-photo.png'
 import { ADD_PRODUCT_TO_CART } from '../../store/constants/cart'
 import { isProductInCart } from '../../utils/products-functions'
+import { updateCookieCart } from '../../utils/cart-functions'
 
 export const ProductPage = () => {
   const { products } = useSelector(store => store.products)
@@ -26,16 +27,18 @@ export const ProductPage = () => {
     if (currentProduct) {
       dispatch({ type: ADD_PRODUCT_TO_CART, product: currentProduct })
       setIsInCart(true)
+      updateCookieCart([ ...cartProducts, { ...currentProduct, count: 1 } ])
     }
   }
 
   return (
     <>
       <Header background={true} />
+      <div className={`container ${styles.container}`}>
       {
         currentProduct &&
         (
-          <div className={`container ${styles.container}`}>
+          <>
             <img className={styles.image} src={currentProduct.image ? currentProduct.image : plug} alt="" />
             <div className={styles.description}>
               <span className={styles.category}>Категория: {currentProduct.category}</span>
@@ -50,9 +53,10 @@ export const ProductPage = () => {
                 <Button isSecondary>Купить 1 экземпляр</Button>
               </div>
             </div>
-          </div>
+          </>
         )
       }
+      </div>
       <Footer />
     </>
   )

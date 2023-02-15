@@ -1,10 +1,11 @@
-import { TProduct } from "../../utils/types"
+import { TCartProduct, TProduct } from "../../utils/types"
 import {
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   CLEAR_CART,
   INCREMENT_PRODUCT_COUNT,
-  DECREMENT_PRODUCT_COUNT
+  DECREMENT_PRODUCT_COUNT,
+  FILL_CART
 } from "../constants/cart"
 
 interface IAddProductToCart {
@@ -26,10 +27,15 @@ interface IDecrementProductCount {
   readonly type: typeof DECREMENT_PRODUCT_COUNT,
   id: string
 }
+interface IFillCart {
+  readonly type: typeof FILL_CART
+  products: Array<TCartProduct>
+}
 
 export type TCartActions = 
   IAddProductToCart |
   IRemoveProductFromCart |
   IClearCart |
   IIncrementProductCount |
-  IDecrementProductCount;
+  IDecrementProductCount |
+  IFillCart;

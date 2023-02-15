@@ -28,9 +28,18 @@
   font-size: 20px;
 }
 
+.plug {
+  color: #858585;
+}
+
+.link {
+  color: #51A2DA;
+}
+
 @media (max-width: 1200px) {
   .container {
     gap: 40px;
+    justify-content: flex-start;
   }
   .total {
     padding: 20px;

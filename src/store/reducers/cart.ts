@@ -1,6 +1,6 @@
 import { TCartProduct } from "../../utils/types"
 import { TCartActions } from "../actions/cart"
-import { ADD_PRODUCT_TO_CART, CLEAR_CART, DECREMENT_PRODUCT_COUNT, INCREMENT_PRODUCT_COUNT, REMOVE_PRODUCT_FROM_CART } from "../constants/cart"
+import { ADD_PRODUCT_TO_CART, CLEAR_CART, DECREMENT_PRODUCT_COUNT, FILL_CART, INCREMENT_PRODUCT_COUNT, REMOVE_PRODUCT_FROM_CART } from "../constants/cart"
 
 type TCartState = {
   products: Array<TCartProduct>
@@ -44,6 +44,12 @@ export const cartReducer = (state = initialCartState, action: TCartActions): TCa
     case CLEAR_CART: {
       return {
         ...initialCartState
+      }
+    }
+    case FILL_CART: {
+      return {
+        ...state,
+        products: action.products ? action.products : []
       }
     }
     default: {
