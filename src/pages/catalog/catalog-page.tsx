@@ -3,7 +3,7 @@ import { Footer } from '../../components/footer/footer'
 import { Header } from '../../components/header/header'
 import { ProductCard } from '../../components/product-card/product-card'
 import { useSelector } from '../../hooks/store-hooks'
-import { getCategories } from '../../utils/get-categories'
+import { getCategories } from '../../utils/products-functions'
 import styles from './catalog.module.css'
 
 export const CatalogPage = () => {

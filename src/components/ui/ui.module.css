@@ -13,6 +13,10 @@
   color: #51A2DA;
 }
 
+.button:disabled {
+  opacity: 0.5;
+}
+
 @media (max-width: 1200px ) {
   .button {
     padding: 12px 60px;
