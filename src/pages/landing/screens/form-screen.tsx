@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Form } from '../../../components/forms/form'
 import { useDispatch, useSelector } from '../../../hooks/store-hooks';
 import { CLEAR_FORM } from '../../../store/constants/form';
 import styles from '../landing.module.css'
 
-export const FormScreen = () => {
+type TScreenProps = {
+  formRef: React.RefObject<HTMLDivElement>
+}
+
+export const FormScreen: FC<TScreenProps> = ({ formRef }) => {
   const { name, phone, address, comment } = useSelector(store => store.form);
   const dispatch = useDispatch()
 
@@ -15,7 +19,7 @@ export const FormScreen = () => {
   }
 
   return (
-    <div className={`container ${styles.form}`}>
+    <div className={`container ${styles.form}`} ref={formRef}>
       <div className={styles.question}>
         <h2>Уже определились с покупкой?</h2>
         <p>Оставьте свои контактные данные, мы Вам перезвоним</p>

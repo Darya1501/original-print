@@ -3,7 +3,11 @@
   display: flex;
   gap: 80px;
   justify-content: center;
-  min-height: 60vh;
+  flex-basis: 100%;
+}
+
+.container a {
+  color: #51A2DA;
 }
 
 .image {

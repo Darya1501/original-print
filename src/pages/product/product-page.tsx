@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from '../../hooks/store-hooks'
 
 import { Footer } from '../../components/footer/footer'
@@ -12,13 +12,20 @@ import plug from '../../images/no-photo.png'
 import { ADD_PRODUCT_TO_CART } from '../../store/constants/cart'
 import { isProductInCart } from '../../utils/products-functions'
 import { updateCookieCart } from '../../utils/cart-functions'
+import { Loader } from '../../components/ui/loader'
+import { CLEAR_FORM } from '../../store/constants/form'
+import { Form } from '../../components/forms/form'
+import { Modal } from '../../components/modal/modal'
 
 export const ProductPage = () => {
-  const { products } = useSelector(store => store.products)
+  const { isProductsRequest, products } = useSelector(store => store.products)
   const { products : cartProducts } = useSelector(store => store.cart)
+  const { name, phone, address, comment } = useSelector(store => store.form);
+
   const { id } = useParams<{ id?: string }>();
   const currentProduct = products.find((product: TProduct) => product.id === id)
 
+  const [ isModal, setIsModal ] = useState(false)
   const [ isInCart, setIsInCart ] = useState(isProductInCart(currentProduct, cartProducts))
 
   const dispatch = useDispatch()
@@ -31,33 +38,50 @@ export const ProductPage = () => {
     }
   }
 
+  const submitOrder: React.FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    if (currentProduct) {
+      console.log(`Новый заказ. Имя: ${name}, номер телефона: ${phone}. Дополнительно: адрес - ${address}, комментарий - ${comment}`)
+      console.log(`Заказ: ${currentProduct.title}, количество: 1 штука`);
+      dispatch({ type: CLEAR_FORM })
+      setIsModal(false)
+    }
+  }
+
   return (
     <>
       <Header background={true} />
       <div className={`container ${styles.container}`}>
-      {
-        currentProduct &&
-        (
-          <>
-            <img className={styles.image} src={currentProduct.image ? currentProduct.image : plug} alt="" />
-            <div className={styles.description}>
-              <span className={styles.category}>Категория: {currentProduct.category}</span>
-              <h2 className={styles.h2}>{currentProduct.title}</h2>
-              <p className={styles.price}>{currentProduct.price} ₽</p>
-              <p className={styles.info}>Размеры: {currentProduct.sizes}</p>
-              <p className={styles.info}>Цвета: {currentProduct.colors}</p>
-              <div className={styles.buttons}>
-                <Button onClick={addToCart} isDisabled={isInCart}>
-                  { isInCart ? 'Товар в корзинe' : 'В корзину' }
-                </Button>
-                <Button isSecondary>Купить 1 экземпляр</Button>
+        {
+          isProductsRequest ? (<Loader />) : 
+          currentProduct ?
+            (
+              <>
+                <img className={styles.image} src={currentProduct.image ? currentProduct.image : plug} alt="" />
+                <div className={styles.description}>
+                  <span className={styles.category}>Категория: {currentProduct.category}</span>
+                  <h2 className={styles.h2}>{currentProduct.title}</h2>
+                  <p className={styles.price}>{currentProduct.price} ₽</p>
+                  <p className={styles.info}>Размеры: {currentProduct.sizes}</p>
+                  <p className={styles.info}>Цвета: {currentProduct.colors}</p>
+                  <div className={styles.buttons}>
+                    <Button onClick={addToCart} isDisabled={isInCart}>
+                      { isInCart ? 'Товар в корзинe' : 'В корзину' }
+                    </Button>
+                    <Button isSecondary onClick={() => setIsModal(true)}>Купить 1 экземпляр</Button>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div>
+                <h2>Вы попали на страницу не существующего товара</h2>
+                <p>Проверьте корректность ссылки или загляните <Link to='/catalog'>в каталог</Link></p>
               </div>
-            </div>
-          </>
-        )
-      }
+            )
+        }
       </div>
       <Footer />
+      { isModal && <Modal onClose={() => setIsModal(false)}><Form size='small' onSubmit={submitOrder}/></Modal> }
     </>
   )
 }

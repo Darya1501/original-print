@@ -6,12 +6,14 @@ import { NoveltiesScreen } from './screens/novelties-screen'
 import { ReviewsScreen } from './screens/reviews-screen'
 
 export const LandingPage = () => {
+  const formRef: React.RefObject<HTMLDivElement> = React.createRef()
+
   return (
     <div>
-      <MainScreen />
+      <MainScreen formRef={formRef} />
       <NoveltiesScreen />
       <ReviewsScreen />
-      <FormScreen />
+      <FormScreen formRef={formRef} />
       <Footer />
     </div>
   )

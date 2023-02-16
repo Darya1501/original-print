@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import logo from '../../images/logo.svg'
 import cart from '../../images/cart.svg'
 import styles from './header.module.css'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from '../../hooks/store-hooks'
 
 type THeaderProps = {
@@ -21,9 +21,12 @@ export const Header: FC<THeaderProps> = ({ background }) => {
           </Link>
           <div className={styles.desctop}>
             <div className={styles.navigation}>
-              <Link to='/catalog'>Каталог</Link>
-              <span>Контакты</span>
-              <span>Как сделать заказ?</span>
+              <NavLink to='/catalog' className={({ isActive }) =>
+              isActive ? styles.active : undefined}>Каталог</NavLink>
+              <NavLink to='/contacts' className={({ isActive }) =>
+              isActive ? styles.active : undefined}>Контакты</NavLink>
+              <NavLink to='/questions' className={({ isActive }) =>
+              isActive ? styles.active : undefined}>Как сделать заказ?</NavLink>
             </div>
           </div>
           <Link to='/cart' className={styles.cart}>
@@ -33,9 +36,12 @@ export const Header: FC<THeaderProps> = ({ background }) => {
         </header>
         <div className={styles.mobile}>
           <div className={styles.navigation}>
-            <span>Каталог</span>
-            <span>Контакты</span>
-            <span>Как сделать заказ?</span>
+              <NavLink to='/catalog' className={({ isActive }) =>
+              isActive ? styles.active : undefined}>Каталог</NavLink>
+              <NavLink to='/contacts' className={({ isActive }) =>
+              isActive ? styles.active : undefined}>Контакты</NavLink>
+              <NavLink to='/questions' className={({ isActive }) =>
+              isActive ? styles.active : undefined}>Как сделать заказ?</NavLink>
           </div>
         </div>
       </div>

@@ -26,7 +26,6 @@ export const getProducts = (): AppThunk => (dispatch: AppDispatch) => {
     if (snapshot.exists()) {
       dispatch({ type: GET_PRODUCTS_SUCCESS, products: snapshot.val() })
     } else {
-      // TODO: Подумать над тем, как обработать ситуацию, когда товаров в БД нет
       dispatch({ type: GET_PRODUCTS_SUCCESS, products: [] })
       console.log("No data available");
     }

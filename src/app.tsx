@@ -12,6 +12,9 @@ import { useDispatch, useSelector } from './hooks/store-hooks';
 import { getProducts } from './store/actions/products';
 import { getCookieCart } from './utils/cart-functions';
 import { FILL_CART } from './store/constants/cart';
+import { ContactsPage } from './pages/info/contacts-page';
+import { QuestionsPage } from './pages/info/questions-page';
+import { Error404 } from './pages/info/error-404';
 
 
 const app = initializeApp({
@@ -46,13 +49,16 @@ function App() {
   )
 
   return (
-    <div>
+    <div className='app'>
       <Router>
         <Routes>
           <Route path="/" element={ <LandingPage /> } />
           <Route path="/catalog" element={ <CatalogPage /> } />
           <Route path="/catalog/:id" element={ <ProductPage /> } />
           <Route path="/cart" element={ <CartPage /> } />
+          <Route path="/contacts" element={ <ContactsPage /> } />
+          <Route path="/questions" element={ <QuestionsPage /> } />
+          <Route path="*" element={ <Error404 /> } />
         </Routes>
       </Router>
     </div>

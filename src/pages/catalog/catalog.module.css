@@ -3,7 +3,7 @@
   display: flex;
   align-items: flex-start;
   gap: 80px;
-  min-height: 60vh;
+  flex-basis: 100%;
 }
 
 .navigation {

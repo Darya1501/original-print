@@ -1,10 +1,10 @@
 .container {
   padding: 80px 0;
-  min-height: 60vh;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 80px;
+  flex-basis: 100%;
 }
 
 .items {

@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../../images/logo.svg'
+import { PHONE_NUMBER, TELEGRAM, VK } from '../../utils/constants'
 import styles from './footer.module.css'
 
 export const Footer = () => {
@@ -24,9 +25,9 @@ export const Footer = () => {
           <div className={styles.info}>
             <span>Контакты</span>
             <span>г. Челябинск, ул. Уличная, д. 15</span>
-            <span>+7 900 000 00 00</span>
-            <span>vk.com/...</span>
-            <span>t.me/@...</span>
+            <span>{PHONE_NUMBER}</span>
+            <span>{VK}</span>
+            <span>{TELEGRAM}</span>
           </div>
         </div>
 
