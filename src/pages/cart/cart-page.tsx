@@ -1,21 +1,24 @@
 import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+
+import { useDispatch, useSelector } from '../../hooks/store-hooks'
+import { CLEAR_CART } from '../../store/constants/cart'
+import { CLEAR_FORM } from '../../store/constants/form'
+
 import { CartItem } from '../../components/cart-item/cart-item'
 import { Footer } from '../../components/footer/footer'
-import { Form } from '../../components/forms/form'
+import { Form, TFormValues } from '../../components/forms/form'
 import { Header } from '../../components/header/header'
 import { Modal } from '../../components/modal/modal'
 import { Button } from '../../components/ui/button'
 import { Loader } from '../../components/ui/loader'
-import { useDispatch, useSelector } from '../../hooks/store-hooks'
-import { CLEAR_CART } from '../../store/constants/cart'
-import { CLEAR_FORM } from '../../store/constants/form'
 import styles from './cart.module.css'
+import { deleteCookie } from '../../utils/cookies'
+import { COOKIE_CART_NAME } from '../../utils/constants'
 
 export const CartPage = () => {
   const { isProductsRequest } = useSelector(store => store.products)
   const { products } = useSelector(store => store.cart)
-  const { name, phone, address, comment } = useSelector(store => store.form);
   const [ isModal, setIsModal ] = useState(false)
   const dispatch = useDispatch()
 
@@ -30,12 +33,19 @@ export const CartPage = () => {
     </span>
   }
 
-  const submitOrder: React.FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-    console.log(`Новый заказ. Имя: ${name}, номер телефона: ${phone}. Дополнительно: адрес - ${address}, комментарий - ${comment}`)
-    console.log(`Заказ:${products.map(product => ` id: ${product.id}, название: ${product.title}, количество ${product.count}`)}`);
+  const submitOrder = (data: TFormValues) => {
+    const title = 'Новый заказ';
+    const message = 
+    `Имя: ${data.name}, номер телефона: ${data.phone}. Дополнительно: адрес - ${data.address}, комментарий - ${data.comment}.
+    Заказ:${products.map(product => ` id: ${product.id}, название: ${product.title}, количество ${product.count}`)}`;
+
+    fetch('send.php', {
+      method: "POST",
+      body: JSON.stringify({ title: title, message: message })
+    })
     dispatch({ type: CLEAR_FORM })
     dispatch({ type: CLEAR_CART })
+    deleteCookie(COOKIE_CART_NAME)
     setIsModal(false)
   }
 

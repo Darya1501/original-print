@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
-import { Form } from '../../../components/forms/form'
-import { useDispatch, useSelector } from '../../../hooks/store-hooks';
-import { CLEAR_FORM } from '../../../store/constants/form';
+import { Form, TFormValues } from '../../../components/forms/form'
 import styles from '../landing.module.css'
 
 type TScreenProps = {
@@ -9,13 +7,16 @@ type TScreenProps = {
 }
 
 export const FormScreen: FC<TScreenProps> = ({ formRef }) => {
-  const { name, phone, address, comment } = useSelector(store => store.form);
-  const dispatch = useDispatch()
 
-  const submitForm: React.FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-    console.log(`Новая заявка. Имя: ${name}, номер телефона: ${phone}. Дополнительно: адрес - ${address}, комментарий - ${comment}`)
-    dispatch({ type: CLEAR_FORM })
+  const submitForm = (data: TFormValues) => {
+    const title = 'Заявка на звонок с лендинга';
+    const message = 
+      `Имя: ${data.name}, номер телефона: ${data.phone}. Дополнительно: адрес - ${data.address}, комментарий - ${data.comment}`;
+
+    fetch('send.php', {
+      method: "POST",
+      body: JSON.stringify({ title: title, message: message })
+    })
   }
 
   return (

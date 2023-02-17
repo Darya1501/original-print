@@ -14,13 +14,12 @@ import { isProductInCart } from '../../utils/products-functions'
 import { updateCookieCart } from '../../utils/cart-functions'
 import { Loader } from '../../components/ui/loader'
 import { CLEAR_FORM } from '../../store/constants/form'
-import { Form } from '../../components/forms/form'
+import { Form, TFormValues } from '../../components/forms/form'
 import { Modal } from '../../components/modal/modal'
 
 export const ProductPage = () => {
   const { isProductsRequest, products } = useSelector(store => store.products)
   const { products : cartProducts } = useSelector(store => store.cart)
-  const { name, phone, address, comment } = useSelector(store => store.form);
 
   const { id } = useParams<{ id?: string }>();
   const currentProduct = products.find((product: TProduct) => product.id === id)
@@ -38,11 +37,17 @@ export const ProductPage = () => {
     }
   }
 
-  const submitOrder: React.FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
+  const submitOrder = (data: TFormValues) => {
     if (currentProduct) {
-      console.log(`Новый заказ. Имя: ${name}, номер телефона: ${phone}. Дополнительно: адрес - ${address}, комментарий - ${comment}`)
-      console.log(`Заказ: ${currentProduct.title}, количество: 1 штука`);
+      const title = 'Новый заказ';
+      const message = 
+      `Имя: ${data.name}, номер телефона: ${data.phone}. Дополнительно: адрес - ${data.address}, комментарий - ${data.comment}.
+      Заказ: ${currentProduct.title}, количество: 1 штука)}`;
+
+      fetch('send.php', {
+        method: "POST",
+        body: JSON.stringify({ title: title, message: message })
+      })
       dispatch({ type: CLEAR_FORM })
       setIsModal(false)
     }
