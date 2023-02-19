@@ -1,37 +1,46 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { useSelector } from '../../hooks/store-hooks'
 import logo from '../../images/logo.svg'
-import { PHONE_NUMBER, TELEGRAM, VK } from '../../utils/constants'
+import { EMAIL, PHONE_NUMBER, PHONE_NUMBER_FORMATTED, VK } from '../../utils/constants'
+import { getCategories } from '../../utils/products-functions'
 import styles from './footer.module.css'
 
 export const Footer = () => {
+  const { products } = useSelector(state => state.products);
+  const categories = getCategories(products);
+
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.container}`}>
         <div className={styles.blocks}>
           <div className={styles.info}>
             <span>Информация</span>
-            <span>О компании</span>
-            <span>Доставка</span>
-            <span>Оплата</span>
+            <Link to='/questions'>Как сделать заказ?</Link>
           </div>
 
-          <div className={styles.info}>
-            <span>Товары</span>
-            <span>Футболки</span>
-            <span>Кружки</span>
-            <span>Прочее</span>
-          </div>
+          {
+            categories.length !== 0 && (
+              <div className={styles.info}>
+                <span>Товары</span>
+                { categories.slice(1, 3).map(category => (<Link to={`/catalog?category=${category}`} key={category}>{category}</Link>)) }
+                <Link to='/catalog'>Прочее</Link>
+              </div>
+            )
+          }
 
           <div className={styles.info}>
             <span>Контакты</span>
-            <span>г. Челябинск, ул. Уличная, д. 15</span>
-            <span>{PHONE_NUMBER}</span>
-            <span>{VK}</span>
-            <span>{TELEGRAM}</span>
+            <a href={`tel:${PHONE_NUMBER}`}>{PHONE_NUMBER_FORMATTED}</a>
+            <a href={VK} target="_blank" rel="noreferrer">vk.com/original-print</a>
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            {/* <span>{TELEGRAM}</span> */}
           </div>
         </div>
-
-        <img src={logo} alt="logo" />
+          
+        <Link to='/'>
+          <img src={logo} alt="logo" />
+        </Link>
       </div>
     </footer>
   )

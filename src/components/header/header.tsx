@@ -36,12 +36,12 @@ export const Header: FC<THeaderProps> = ({ background }) => {
         </header>
         <div className={styles.mobile}>
           <div className={styles.navigation}>
-              <NavLink to='/catalog' className={({ isActive }) =>
-              isActive ? styles.active : undefined}>Каталог</NavLink>
-              <NavLink to='/contacts' className={({ isActive }) =>
-              isActive ? styles.active : undefined}>Контакты</NavLink>
-              <NavLink to='/questions' className={({ isActive }) =>
-              isActive ? styles.active : undefined}>Как сделать заказ?</NavLink>
+            <NavLink to='/catalog' className={({ isActive }) =>
+            isActive ? styles.active : undefined}>Каталог</NavLink>
+            <NavLink to='/contacts' className={({ isActive }) =>
+            isActive ? styles.active : undefined}>Контакты</NavLink>
+            <NavLink to='/questions' className={({ isActive }) =>
+            isActive ? styles.active : undefined}>Как сделать заказ?</NavLink>
           </div>
         </div>
       </div>

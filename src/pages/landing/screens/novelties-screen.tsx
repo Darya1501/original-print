@@ -11,7 +11,7 @@ export const NoveltiesScreen = () => {
     <div className={`container ${styles.container}`}>
       <h2 className={styles.h2}>Новинки</h2>
       <div className={styles.products}>
-        { products.slice(0, 7).map((product: TProduct) => (<ProductCard key={product.id} product={product} />)) }
+        { products.slice(0, 6).map((product: TProduct) => (<ProductCard key={product.id} product={product} />)) }
       </div>
       <a className={styles.link} href='/catalog'>Все товары {'->'}</a>
     </div>

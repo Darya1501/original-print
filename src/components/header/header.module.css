@@ -69,7 +69,7 @@
   .navigation {
     gap: 20px;
   }
-  .navigation span {
+  .navigation a {
     font-size: 12px;
   }
   .logo {

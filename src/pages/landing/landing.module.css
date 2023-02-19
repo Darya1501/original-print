@@ -153,6 +153,7 @@
 
   .products {
     gap: 10px;
+    margin-bottom: 24px;
   }
 
   .link {
@@ -167,10 +168,6 @@
   .form p {
     font-size: 14px;
     text-align: center;
-  }
-
-  .products {
-    margin-bottom: 24px;
   }
 
   .reviews > .container {

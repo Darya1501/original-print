@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Footer } from '../../components/footer/footer'
 import { Header } from '../../components/header/header'
 import { ProductCard } from '../../components/product-card/product-card'
@@ -12,7 +13,10 @@ export const CatalogPage = () => {
   const { isProductsRequest, isProductsSuccess, isProductsFailed, products } = useSelector(state => state.products);
   const categories = getCategories(products);
 
-  const [ activeCategory, setActiveCategory ] = useState('Все')
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get('category');
+
+  const [ activeCategory, setActiveCategory ] = useState(category ? category : 'Все')
 
   const categoryClick = (category: string) => {
     if (activeCategory === category) {

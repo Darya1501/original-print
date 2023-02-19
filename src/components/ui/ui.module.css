@@ -128,4 +128,28 @@
     padding: 12px 60px;
     font-size: 14px;
   }
+
+  .label span {
+    margin-bottom: 10px;
+  }
+
+  .label input {
+    font-size: 14px;
+    min-width: 320px;
+  }
+
+  .label input::placeholder {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px ) { 
+  .label input {
+    min-width: 100%;
+    padding: 10px 12px;
+  }
+
+  .label span {
+    font-size: 14px;
+  }
 }

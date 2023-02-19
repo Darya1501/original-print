@@ -6,6 +6,7 @@ import trash from '../../images/trash-icon.svg'
 import { useDispatch, useSelector } from '../../hooks/store-hooks'
 import { DECREMENT_PRODUCT_COUNT, INCREMENT_PRODUCT_COUNT, REMOVE_PRODUCT_FROM_CART } from '../../store/constants/cart'
 import { updateCookieCart } from '../../utils/cart-functions'
+import { Link } from 'react-router-dom'
 
 type TItemProps = {
   product: TCartProduct
@@ -34,7 +35,7 @@ export const CartItem: FC<TItemProps> = ({ product }) => {
     <div className={styles.card}>
       <img className={styles.image} src={product.image ? product.image : plug} alt="" />
       <div className={styles.info}>
-        <span className={styles.name}>{product.title}</span>
+        <Link to={`/catalog/${product.id}`} className={styles.name}>{product.title}</Link>
         <div className={styles.quantity}>
           <button className={styles.minus} disabled={product.count === 1} onClick={() => changeCount('decrement')}></button>
           <span>{product.count}</span>
