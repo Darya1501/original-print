@@ -123,6 +123,10 @@
   outline: solid 2px #9b6b6b;
 }
 
+.sent {
+  text-align: center;
+}
+
 @media (max-width: 1200px ) {
   .button {
     padding: 12px 60px;

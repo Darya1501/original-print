@@ -16,6 +16,7 @@ import { Loader } from '../../components/ui/loader'
 import { CLEAR_FORM } from '../../store/constants/form'
 import { Form, TFormValues } from '../../components/forms/form'
 import { Modal } from '../../components/modal/modal'
+import { ApplicationSent } from '../../components/ui/application-sent'
 
 export const ProductPage = () => {
   const { isProductsRequest, products } = useSelector(store => store.products)
@@ -25,6 +26,7 @@ export const ProductPage = () => {
   const currentProduct = products.find((product: TProduct) => product.id === id)
 
   const [ isModal, setIsModal ] = useState(false)
+  const [ isSentModal, setIsSentModal ] = useState(false)
   const [ isInCart, setIsInCart ] = useState(isProductInCart(currentProduct, cartProducts))
 
   const dispatch = useDispatch()
@@ -50,6 +52,7 @@ export const ProductPage = () => {
       })
       dispatch({ type: CLEAR_FORM })
       setIsModal(false)
+      setIsSentModal(true)
     }
   }
 
@@ -87,6 +90,7 @@ export const ProductPage = () => {
       </div>
       <Footer />
       { isModal && <Modal onClose={() => setIsModal(false)}><Form size='small' onSubmit={submitOrder}/></Modal> }
+      { isSentModal && <Modal onClose={() => setIsSentModal(false)}><ApplicationSent /></Modal> }
     </>
   )
 }

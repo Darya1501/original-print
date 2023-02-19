@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from '../../hooks/store-hooks'
 import { CLEAR_CART } from '../../store/constants/cart'
 import { CLEAR_FORM } from '../../store/constants/form'
 
+import { deleteCookie } from '../../utils/cookies'
+import { COOKIE_CART_NAME } from '../../utils/constants'
+
 import { CartItem } from '../../components/cart-item/cart-item'
 import { Footer } from '../../components/footer/footer'
 import { Form, TFormValues } from '../../components/forms/form'
@@ -12,14 +15,16 @@ import { Header } from '../../components/header/header'
 import { Modal } from '../../components/modal/modal'
 import { Button } from '../../components/ui/button'
 import { Loader } from '../../components/ui/loader'
+import { ApplicationSent } from '../../components/ui/application-sent'
 import styles from './cart.module.css'
-import { deleteCookie } from '../../utils/cookies'
-import { COOKIE_CART_NAME } from '../../utils/constants'
 
 export const CartPage = () => {
   const { isProductsRequest } = useSelector(store => store.products)
   const { products } = useSelector(store => store.cart)
+
   const [ isModal, setIsModal ] = useState(false)
+  const [ isSentModal, setIsSentModal ] = useState(false)
+  
   const dispatch = useDispatch()
 
   const totalPrice = useMemo(() => {
@@ -47,6 +52,7 @@ export const CartPage = () => {
     dispatch({ type: CLEAR_CART })
     deleteCookie(COOKIE_CART_NAME)
     setIsModal(false)
+    setIsSentModal(true)
   }
 
   return (
@@ -68,6 +74,7 @@ export const CartPage = () => {
       </div>
       <Footer />
       { isModal && <Modal onClose={() => setIsModal(false)}><Form size='small' onSubmit={submitOrder}/></Modal> }
+      { isSentModal && <Modal onClose={() => setIsSentModal(false)}><ApplicationSent /></Modal> }
     </>
   )
 }
