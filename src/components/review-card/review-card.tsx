@@ -15,7 +15,7 @@ export const ReviewCard: FC<TReviewCardProps>= ({ review }) => {
         <img className={styles.image} src={url} alt="" />
         <span>{review.name}</span>
       </div>
-      <p className={styles.text}>{review.text}</p>
+      <p className={styles.text}>{review.comment}</p>
     </div>
   )
 }

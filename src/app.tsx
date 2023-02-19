@@ -15,6 +15,7 @@ import { FILL_CART } from './store/constants/cart';
 import { ContactsPage } from './pages/info/contacts-page';
 import { QuestionsPage } from './pages/info/questions-page';
 import { Error404 } from './pages/info/error-404';
+import { ReviewsPage } from './pages/reviews/reviews-page';
 
 
 const app = initializeApp({
@@ -55,6 +56,7 @@ function App() {
           <Route path="/" element={ <LandingPage /> } />
           <Route path="/catalog" element={ <CatalogPage /> } />
           <Route path="/catalog/:id" element={ <ProductPage /> } />
+          <Route path="/reviews" element={ <ReviewsPage /> } />
           <Route path="/cart" element={ <CartPage /> } />
           <Route path="/contacts" element={ <ContactsPage /> } />
           <Route path="/questions" element={ <QuestionsPage /> } />

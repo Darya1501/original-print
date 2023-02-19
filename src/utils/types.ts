@@ -26,5 +26,5 @@ export type TCartProduct = TProduct & { count: number }
 
 export type TReview = {
   name: string,
-  text: string
+  comment: string
 }

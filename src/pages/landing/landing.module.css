@@ -66,6 +66,12 @@
 
 .reviews > .container {
   display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.reviewsCards {
+  display: flex;
   justify-content: space-between;
   gap: 20px;
 }
@@ -122,11 +128,11 @@
     display: flex;
   }
 
-  .reviews > .container {
+  .reviewsCards {
     padding: 40px 0;
   }
 
-  .reviews > .container div:nth-child(n+3) {
+  .reviewsCards div:nth-child(n+3) {
     display: none;
   }
 
@@ -170,7 +176,7 @@
     text-align: center;
   }
 
-  .reviews > .container {
+  .reviewsCards {
     flex-wrap: wrap;
   }
 }
