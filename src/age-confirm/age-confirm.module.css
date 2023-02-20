@@ -1,0 +1,14 @@
+.confirm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirm p {
+  margin-bottom: 32px;
+}
+
+.buttons {
+  display: flex;
+  gap: 24px;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { Footer } from '../../components/footer/footer'
 import { Header } from '../../components/header/header'
 import { ProductCard } from '../../components/product-card/product-card'
@@ -20,7 +20,7 @@ export const CatalogPage = () => {
 
   const categoryClick = (category: string) => {
     if (activeCategory === category) {
-      setActiveCategory('')
+      setActiveCategory('Все')
     } else {
       setActiveCategory(category)
     }
@@ -38,6 +38,7 @@ export const CatalogPage = () => {
           >{category}</span>
         ))
       }
+      <Link to='/unusual' className={styles.category}>Необычная категория</Link>
     </div>
   )
 

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 import { useDispatch, useSelector } from '../../hooks/store-hooks'
 import { CLEAR_CART } from '../../store/constants/cart'
-import { CLEAR_FORM } from '../../store/constants/form'
 
 import { deleteCookie } from '../../utils/cookies'
 import { COOKIE_CART_NAME } from '../../utils/constants'
@@ -38,17 +37,17 @@ export const CartPage = () => {
     </span>
   }
 
-  const submitOrder = (data: TFormValues) => {
+  const submitOrder = async (data: TFormValues) => {
     const title = 'Новый заказ';
     const message = 
     `Имя: ${data.name}, номер телефона: ${data.phone}. Дополнительно: адрес - ${data.address}, комментарий - ${data.comment}.
     Заказ:${products.map(product => ` id: ${product.id}, название: ${product.title}, количество ${product.count}`)}`;
 
-    fetch('send.php', {
+    await fetch('send.php', {
       method: "POST",
       body: JSON.stringify({ title: title, message: message })
     })
-    dispatch({ type: CLEAR_FORM })
+
     dispatch({ type: CLEAR_CART })
     deleteCookie(COOKIE_CART_NAME)
     setIsModal(false)

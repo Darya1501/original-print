@@ -1,0 +1,32 @@
+.container {
+  padding: 80px 0;
+  flex-basis: 100%;
+}
+
+.products {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.active {
+  background-color: #49494A;
+  color: #FFFFFF;
+}
+
+@media (max-width: 1200px ) {
+  .products {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 900px ) {
+  .container {
+    padding: 40px 0;
+  }
+  .products {
+    justify-content: space-between;
+    gap: 20px 0;
+  }  
+}

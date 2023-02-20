@@ -16,6 +16,7 @@ import { ContactsPage } from './pages/info/contacts-page';
 import { QuestionsPage } from './pages/info/questions-page';
 import { Error404 } from './pages/info/error-404';
 import { ReviewsPage } from './pages/reviews/reviews-page';
+import { UnusualPage } from './pages/unusual-page/unusual-page';
 
 
 const app = initializeApp({
@@ -60,6 +61,7 @@ function App() {
           <Route path="/cart" element={ <CartPage /> } />
           <Route path="/contacts" element={ <ContactsPage /> } />
           <Route path="/questions" element={ <QuestionsPage /> } />
+          <Route path="/unusual" element={ <UnusualPage /> } />
           <Route path="*" element={ <Error404 /> } />
         </Routes>
       </Router>

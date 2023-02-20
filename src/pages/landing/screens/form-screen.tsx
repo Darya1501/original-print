@@ -11,12 +11,12 @@ type TScreenProps = {
 export const FormScreen: FC<TScreenProps> = ({ formRef }) => {
   const [ isSentModal, setIsSentModal ] = useState(false)
 
-  const submitForm = (data: TFormValues) => {
+  const submitForm = async (data: TFormValues) => {
     const title = 'Заявка на звонок с лендинга';
     const message = 
       `Имя: ${data.name}, номер телефона: ${data.phone}. Дополнительно: адрес - ${data.address}, комментарий - ${data.comment}`;
 
-    fetch('send.php', {
+    await fetch('send.php', {
       method: "POST",
       body: JSON.stringify({ title: title, message: message })
     })

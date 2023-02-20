@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from '../../hooks/store-hooks'
 
@@ -13,17 +13,35 @@ import { ADD_PRODUCT_TO_CART } from '../../store/constants/cart'
 import { isProductInCart } from '../../utils/products-functions'
 import { updateCookieCart } from '../../utils/cart-functions'
 import { Loader } from '../../components/ui/loader'
-import { CLEAR_FORM } from '../../store/constants/form'
 import { Form, TFormValues } from '../../components/forms/form'
 import { Modal } from '../../components/modal/modal'
 import { ApplicationSent } from '../../components/ui/application-sent'
+import { isAgeCookieExist, isCoockieLegalAge } from '../../utils/age-functions'
+import { AgeConfirm } from '../../age-confirm/age-confirm'
+import { NoAccess } from '../unusual-page/no-access'
 
 export const ProductPage = () => {
-  const { isProductsRequest, products } = useSelector(store => store.products)
+  const { isProductsRequest, products, unusualProducts } = useSelector(store => store.products)
   const { products : cartProducts } = useSelector(store => store.cart)
 
   const { id } = useParams<{ id?: string }>();
-  const currentProduct = products.find((product: TProduct) => product.id === id)
+  const currentProduct = products.concat(unusualProducts).find((product: TProduct) => product.id === id)
+
+  const [ isUnusual, setIsUnusual ] = useState(false)
+  const [ isConfirmIsVisible, setIsConfirmIsVisible ] = useState(true)
+  const [ isLegalAge, setIsLegalAge ] = useState(false)
+
+  useEffect(() => {
+    if (id && id[0] === 'u') {
+      if (isAgeCookieExist()) {
+        setIsConfirmIsVisible(false)
+        if (isCoockieLegalAge()) {
+          setIsLegalAge(true)
+        }
+      }
+      setIsUnusual(true)
+    }
+  }, [id])
 
   const [ isModal, setIsModal ] = useState(false)
   const [ isSentModal, setIsSentModal ] = useState(false)
@@ -39,22 +57,41 @@ export const ProductPage = () => {
     }
   }
 
-  const submitOrder = (data: TFormValues) => {
+  const submitOrder = async (data: TFormValues) => {
     if (currentProduct) {
       const title = 'Новый заказ';
       const message = 
       `Имя: ${data.name}, номер телефона: ${data.phone}. Дополнительно: адрес - ${data.address}, комментарий - ${data.comment}.
       Заказ: ${currentProduct.title}, количество: 1 штука)}`;
 
-      fetch('send.php', {
+      await fetch('send.php', {
         method: "POST",
         body: JSON.stringify({ title: title, message: message })
       })
-      dispatch({ type: CLEAR_FORM })
+
       setIsModal(false)
       setIsSentModal(true)
     }
   }
+
+  const Product: FC<{product: TProduct}> = ({ product }) => (
+    <>
+      <img className={styles.image} src={product.image ? product.image : plug} alt="" />
+      <div className={styles.description}>
+        <span className={styles.category}>Категория: {product.category}</span>
+        <h2 className={styles.h2}>{product.title}</h2>
+        <p className={styles.price}>{product.price} ₽</p>
+        <p className={styles.info}>Размеры: {product.sizes}</p>
+        <p className={styles.info}>Цвета: {product.colors}</p>
+        <div className={styles.buttons}>
+          <Button onClick={addToCart} isDisabled={isInCart}>
+            { isInCart ? 'Товар в корзинe' : 'В корзину' }
+          </Button>
+          <Button isSecondary onClick={() => setIsModal(true)}>Купить 1 экземпляр</Button>
+        </div>
+      </div>
+    </>
+  )
 
   return (
     <>
@@ -63,29 +100,22 @@ export const ProductPage = () => {
         {
           isProductsRequest ? (<Loader />) : 
           currentProduct ?
-            (
-              <>
-                <img className={styles.image} src={currentProduct.image ? currentProduct.image : plug} alt="" />
-                <div className={styles.description}>
-                  <span className={styles.category}>Категория: {currentProduct.category}</span>
-                  <h2 className={styles.h2}>{currentProduct.title}</h2>
-                  <p className={styles.price}>{currentProduct.price} ₽</p>
-                  <p className={styles.info}>Размеры: {currentProduct.sizes}</p>
-                  <p className={styles.info}>Цвета: {currentProduct.colors}</p>
-                  <div className={styles.buttons}>
-                    <Button onClick={addToCart} isDisabled={isInCart}>
-                      { isInCart ? 'Товар в корзинe' : 'В корзину' }
-                    </Button>
-                    <Button isSecondary onClick={() => setIsModal(true)}>Купить 1 экземпляр</Button>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div>
-                <h2>Вы попали на страницу не существующего товара</h2>
-                <p>Проверьте корректность ссылки или загляните <Link to='/catalog'>в каталог</Link></p>
-              </div>
-            )
+          (
+            isUnusual ?
+            ( 
+              isConfirmIsVisible ? 
+              (<AgeConfirm changeStatus={setIsLegalAge} hide={() => setIsConfirmIsVisible(false)} />) :
+              (
+                isLegalAge ? (<Product product={currentProduct} />) : (<NoAccess />)
+              )
+            ) : (<Product product={currentProduct} />) 
+          ) :
+          (
+            <div>
+              <h2>Вы попали на страницу не существующего товара</h2>
+              <p>Проверьте корректность ссылки или загляните <Link to='/catalog'>в каталог</Link></p>
+            </div>
+          )
         }
       </div>
       <Footer />

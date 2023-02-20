@@ -1,5 +1,5 @@
 import { AppDispatch, AppThunk, TProduct } from "../../utils/types";
-import { GET_PRODUCTS_FAILED, GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS } from "../constants/products";
+import { ADD_UNUSUAL_PRODUCTS, GET_PRODUCTS_FAILED, GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS } from "../constants/products";
 import { child, get } from "firebase/database";
 import { dbRef } from "../../app";
 
@@ -13,11 +13,16 @@ interface IGetProductsSuccess {
 interface IGetProductsFailed {
   readonly type: typeof GET_PRODUCTS_FAILED
 }
+interface IAddUnusualProducts {
+  readonly type: typeof ADD_UNUSUAL_PRODUCTS,
+  products: Array<TProduct>
+}
 
 export type TProductsActions = 
   IGetProductsRequest |
   IGetProductsSuccess |
-  IGetProductsFailed;
+  IGetProductsFailed |
+  IAddUnusualProducts;
 
 export const getProducts = (): AppThunk => (dispatch: AppDispatch) => {
   dispatch({ type: GET_PRODUCTS_REQUEST });
@@ -31,6 +36,14 @@ export const getProducts = (): AppThunk => (dispatch: AppDispatch) => {
     }
   }).catch((error) => {
     dispatch({ type: GET_PRODUCTS_FAILED })
+    console.error(error);
+  });
+
+  get(child(dbRef, `/unusual`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      dispatch({ type: ADD_UNUSUAL_PRODUCTS, products: snapshot.val() })
+    }
+  }).catch((error) => {
     console.error(error);
   });
 }

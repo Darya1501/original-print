@@ -1,9 +1,11 @@
 import { TProduct } from "../../utils/types"
 import { TProductsActions } from "../actions/products"
-import { GET_PRODUCTS_FAILED, GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS } from "../constants/products"
+import { ADD_UNUSUAL_PRODUCTS, GET_PRODUCTS_FAILED, GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS } from "../constants/products"
 
 type TProductsState = {
   products: Array<TProduct>,
+  unusualProducts: Array<TProduct>,
+
   isProductsRequest: boolean,
   isProductsSuccess: boolean,
   isProductsFailed: boolean
@@ -14,7 +16,8 @@ export const initialProductsState: TProductsState = {
   isProductsSuccess: false,
   isProductsFailed: false,
 
-  products: []
+  products: [],
+  unusualProducts: []
 }
 
 export const productsReducer = (state = initialProductsState, action: TProductsActions): TProductsState => {
@@ -42,6 +45,12 @@ export const productsReducer = (state = initialProductsState, action: TProductsA
         isProductsRequest: false, 
         isProductsSuccess: false,
         isProductsFailed: true
+      }
+    }
+    case ADD_UNUSUAL_PRODUCTS: {
+      return {
+        ...state,
+        unusualProducts: action.products.map(product => ({ ...product, category: 'Необычная категория' }))
       }
     }
     default: {
