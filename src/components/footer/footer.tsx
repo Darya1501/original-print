@@ -16,24 +16,32 @@ export const Footer = () => {
         <div className={styles.blocks}>
           <div className={styles.info}>
             <span>Информация</span>
-            <Link to='/questions'>Как сделать заказ?</Link>
+            <Link className={styles.text} to='/questions'>Как сделать заказ?</Link>
           </div>
 
           {
             categories.length !== 0 && (
               <div className={styles.info}>
                 <span>Товары</span>
-                { categories.slice(1, 3).map(category => (<Link to={`/catalog?category=${category}`} key={category}>{category}</Link>)) }
-                <Link to='/catalog'>Прочее</Link>
+                { categories.slice(1, 3).map(category => (
+                  <Link
+                    to={`/catalog?category=${category}`}
+                    key={category}
+                    className={styles.text}
+                    >
+                      {category}
+                  </Link>))
+                }
+                <Link className={styles.text} to='/catalog'>Прочее</Link>
               </div>
             )
           }
 
           <div className={styles.info}>
             <span>Контакты</span>
-            <a href={`tel:${PHONE_NUMBER}`}>{PHONE_NUMBER_FORMATTED}</a>
-            <a href={VK} target="_blank" rel="noreferrer">vk.com/original-print</a>
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            <a className={styles.text} href={`tel:${PHONE_NUMBER}`}>{PHONE_NUMBER_FORMATTED}</a>
+            <a className={styles.text} href={VK} target="_blank" rel="noreferrer">vk.com/original-print</a>
+            <a className={styles.text} href={`mailto:${EMAIL}`}>{EMAIL}</a>
             {/* <span>{TELEGRAM}</span> */}
           </div>
         </div>

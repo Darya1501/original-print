@@ -13,8 +13,9 @@ export const FormScreen: FC<TScreenProps> = ({ formRef }) => {
 
   const submitForm = async (data: TFormValues) => {
     const title = 'Заявка на звонок с лендинга';
-    const message = 
-      `Имя: ${data.name}, номер телефона: ${data.phone}. Дополнительно: адрес - ${data.address}, комментарий - ${data.comment}`;
+    let message = `<strong>Заявка на звонок с лендинга</strong>\n\nИмя: ${data.name}\nНомер телефона: ${data.phone}\n\n`;
+    if (data.address) message += `Адрес доставки: ${data.address}\n`
+    if (data.comment) message += `Комментарий: ${data.comment}`
 
     await fetch('send.php', {
       method: "POST",

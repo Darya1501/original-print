@@ -69,12 +69,12 @@
     max-width: 90vw;
     overflow-x: scroll;
   }
-  .navigation span {
+  .category {
     font-size: 12px;
     flex-shrink: 0;
   }
   .products {
     justify-content: space-between;
-    gap: 20px 0;
+    gap: 20px 5px;
   }  
 }

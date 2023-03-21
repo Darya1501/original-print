@@ -51,6 +51,7 @@
 
 @media (max-width: 900px ) {
   .card {
+    width: 100%;
     max-width: 30%;
   }
 

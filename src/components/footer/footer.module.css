@@ -44,7 +44,7 @@
     width: 140px;
   }
 
-  .info span {
+  .info span, .text {
     font-size: 14px;
   }
 }

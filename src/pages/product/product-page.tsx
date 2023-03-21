@@ -59,12 +59,13 @@ export const ProductPage = () => {
 
   const submitOrder = async (data: TFormValues) => {
     if (currentProduct) {
-      const title = 'Новый заказ';
-      const message = 
-      `Имя: ${data.name}, номер телефона: ${data.phone}. Дополнительно: адрес - ${data.address}, комментарий - ${data.comment}.
-      Заказ: ${currentProduct.title}, количество: 1 штука)}`;
+      const title = 'Новый заказ (со страницы товара)';
+      let message = `<p>Имя: ${data.name}</p><p>Номер телефона: ${data.phone}</p><br>`;
+      if (data.address) message += `<p>Адрес доставки: ${data.address}</p>`
+      if (data.comment) message += `<p>Комментарий: ${data.comment}</p>`
+      message += `<br><p>Заказ: ${currentProduct.title} (id: ${currentProduct.id}), количество: 1</p>`;
 
-      await fetch('send.php', {
+      await fetch('/send.php', {
         method: "POST",
         body: JSON.stringify({ title: title, message: message })
       })

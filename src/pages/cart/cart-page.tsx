@@ -38,12 +38,14 @@ export const CartPage = () => {
   }
 
   const submitOrder = async (data: TFormValues) => {
-    const title = 'Новый заказ';
-    const message = 
-    `Имя: ${data.name}, номер телефона: ${data.phone}. Дополнительно: адрес - ${data.address}, комментарий - ${data.comment}.
-    Заказ:${products.map(product => ` id: ${product.id}, название: ${product.title}, количество ${product.count}`)}`;
+    const title = 'Новый заказ (из корзины)';
+    let message = `<p>Имя: ${data.name}</p><p>Номер телефона: ${data.phone}</p><br>`;
+      if (data.address) message += `<p>Адрес доставки: ${data.address}</p>`
+      if (data.comment) message += `<p>Комментарий: ${data.comment}</p>`
+    message += `<br><p>Заказ:</p>${products.map((product, index) => 
+    `<p>${index + 1}) id: ${product.id},</p><p>название: ${product.title},</p><p>количество: ${product.count}</p>`)}`
 
-    await fetch('send.php', {
+    await fetch('/send.php', {
       method: "POST",
       body: JSON.stringify({ title: title, message: message })
     })
